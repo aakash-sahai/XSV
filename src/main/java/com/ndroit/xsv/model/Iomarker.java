@@ -3,15 +3,17 @@
  */
 package com.ndroit.xsv.model;
 
+import nu.xom.Element;
+
 /**
  * @author Aakash Sahai
  *
  */
 public class Iomarker extends Geometry {
 	
-	private int x1, y1;
+	private int x, y;
 	private String name;
-	private String orientation;
+	private String orien;
 	private int fontsize;
 
 	/**
@@ -19,18 +21,19 @@ public class Iomarker extends Geometry {
 	 */
 	public Iomarker() {
 		super();
-		this.x1 = this.x2 = this.y1 = this.y2 = 0;
+		this.x = this.y = 0;
 	}
 	
 	/**
 	 * 
 	 */
-	public Iomarker(int x1, int y1, String name, String orien) {
+	public Iomarker(int x1, int y1, String name, String orien, int fontsize) {
 		super();
-		this.x1 = x1;
+		this.x = x1;
 		this.name = name;
-		this.y1 = y1;
-		this.orientation = orien;
+		this.y = y1;
+		this.orien = orien;
+		this.fontsize = fontsize;
 	}
 	
 	/* (non-Javadoc)
@@ -49,33 +52,33 @@ public class Iomarker extends Geometry {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	/**
-	 * @return the x1
+	 * @return the x
 	 */
-	public int getX1() {
-		return x1;
+	public int getX() {
+		return x;
 	}
 
 	/**
-	 * @param x1 the x1 to set
+	 * @param x the x to set
 	 */
-	public void setX1(int x1) {
-		this.x1 = x1;
+	public void setX(int x) {
+		this.x = x;
 	}
 
 	/**
-	 * @return the y1
+	 * @return the y
 	 */
-	public int getY1() {
-		return y1;
+	public int getY() {
+		return y;
 	}
 
 	/**
-	 * @param y1 the y1 to set
+	 * @param y the y to set
 	 */
-	public void setY1(int y1) {
-		this.y1 = y1;
+	public void setY(int y) {
+		this.y = y;
 	}
 
 	/**
@@ -93,17 +96,17 @@ public class Iomarker extends Geometry {
 	}
 
 	/**
-	 * @return the orientation
+	 * @return the orien
 	 */
-	public String getOrientation() {
-		return orientation;
+	public String getOrien() {
+		return orien;
 	}
 
 	/**
-	 * @param orientation the orientation to set
+	 * @param orien the orien to set
 	 */
-	public void setOrientation(String orientation) {
-		this.orientation = orientation;
+	public void setOrien(String orien) {
+		this.orien = orien;
 	}
 
 	/**
@@ -118,6 +121,16 @@ public class Iomarker extends Geometry {
 	 */
 	public void setFontsize(int fontsize) {
 		this.fontsize = fontsize;
+	}
+
+	public static Iomarker parse(Element el) throws Exception {
+		Iomarker iomarker = new Iomarker();
+		iomarker.x = Integer.parseInt(el.getAttributeValue("x"));
+		iomarker.y = Integer.parseInt(el.getAttributeValue("y"));
+		iomarker.fontsize = Integer.parseInt(el.getAttributeValue("fontsize"));
+		iomarker.orien = el.getAttributeValue("orien");
+		iomarker.name = el.getAttributeValue("name");
+		return iomarker;
 	}
 
 }

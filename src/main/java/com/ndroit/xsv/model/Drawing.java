@@ -3,6 +3,9 @@
  */
 package com.ndroit.xsv.model;
 
+import nu.xom.Element;
+import nu.xom.Elements;
+
 /**
  * @author Aakash Sahai
  *
@@ -63,5 +66,24 @@ public class Drawing {
 		this.netlist = netlist;
 	}
 	
+	public static Drawing parse(Element el) throws Exception {
+		Drawing drawing = new Drawing();
+		drawing.version = Integer.parseInt(el.getAttributeValue("version"));
+		Elements children = el.getChildElements();
+		for (int i = 0; i < children.size(); i++) {
+            Element c = children.get(i);
+            String cname = c.getLocalName();
+            if (cname.equals("sheet")) {
+            	drawing.sheet = Sheet.parse(c);
+            } else if (cname.equals("netlist")) {
+            	drawing.netlist = Netlist.parse(c);
+            } else if (cname.equals("attr")) {
+            	drawing.attr = Attr.parse(c);
+            } else {
+            	throw new Exception("Unknown child element under <drawing>: " + cname);	
+            }
+		}
+		return drawing;
+	}
 	
 }

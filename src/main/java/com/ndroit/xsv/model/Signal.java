@@ -4,6 +4,9 @@
 
 package com.ndroit.xsv.model;
 
+import nu.xom.Element;
+import nu.xom.Elements;
+
 /**
  * @author Aakash Sahai
  *
@@ -25,4 +28,9 @@ public class Signal {
 		this.name = name;
 	}
 
+	public static Signal parse(Element el) throws Exception {
+		Signal signal = new Signal();
+		signal.name = el.getAttributeValue("name");
+		return signal;
+	}
 }

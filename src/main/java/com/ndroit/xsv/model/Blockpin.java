@@ -4,6 +4,8 @@
 
 package com.ndroit.xsv.model;
 
+import nu.xom.Element;
+
 /**
  * @author Aakash Sahai
  *
@@ -37,4 +39,10 @@ public class Blockpin {
 		this.signalname = signalname;
 	}
 	
+	public static Blockpin parse(Element el) throws Exception {
+		Blockpin blockpin = new Blockpin();
+		blockpin.signalname = el.getAttributeValue("signalname");
+		blockpin.name = el.getAttributeValue("name");
+		return blockpin;
+	}
 }

@@ -4,6 +4,8 @@
 
 package com.ndroit.xsv.model;
 
+import nu.xom.Element;
+
 /**
  * @author Aakash Sahai
  *
@@ -38,4 +40,10 @@ public class Port {
 		this.polarity = polarity;
 	}
 
+	public static Port parse(Element el) throws Exception {
+		Port port = new Port();
+		port.name = el.getAttributeValue("name");
+		port.polarity = el.getAttributeValue("polarity");
+		return port;
+	}
 }

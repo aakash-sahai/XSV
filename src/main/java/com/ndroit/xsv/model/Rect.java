@@ -3,30 +3,32 @@
  */
 package com.ndroit.xsv.model;
 
+import nu.xom.Element;
+
 /**
  * @author Aakash Sahai
  *
  */
 public class Rect extends Geometry {
 	
-	protected int x1, y1, length, width;
+	protected int x, y, height, width;
 
 	/**
 	 * 
 	 */
 	public Rect() {
 		super();
-		this.x1 = this.y1 = this.length = this.width = 0;
+		this.x = this.y = this.height = this.width = 0;
 	}
 	
 	/**
 	 * 
 	 */
-	public Rect(int x1, int y1, int length, int width) {
+	public Rect(int x1, int y1, int height, int width) {
 		super();
-		this.x1 = x1;
-		this.y1 = y1;
-		this.length = length;
+		this.x = x1;
+		this.y = y1;
+		this.height = height;
 		this.width = width;
 	}
 	
@@ -45,6 +47,15 @@ public class Rect extends Geometry {
 	public void draw(int atX, int atY, double scale) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public static Rect parse(Element el) throws Exception {
+		Rect rect = new Rect();
+		rect.x = Integer.parseInt(el.getAttributeValue("x"));
+		rect.y = Integer.parseInt(el.getAttributeValue("y"));
+		rect.width = Integer.parseInt(el.getAttributeValue("width"));
+		rect.height = Integer.parseInt(el.getAttributeValue("height"));
+		return rect;
 	}
 
 }

@@ -4,6 +4,9 @@
 
 package com.ndroit.xsv.model;
 
+import nu.xom.Attribute;
+import nu.xom.Element;
+
 /**
  * @author Aakash Sahai
  *
@@ -38,4 +41,14 @@ public class Trait {
 		this.value = value;
 	}
 
+	public static Trait parse(Element el) throws Exception {
+		Trait trait = new Trait();
+		
+		for (int i = 0; i < el.getAttributeCount(); i++) {
+			Attribute attr = el.getAttribute(i);
+			trait.name = attr.getLocalName();
+			trait.value = attr.getValue();
+		}
+		return trait;
+	}
 }

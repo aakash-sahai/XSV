@@ -3,6 +3,9 @@
  */
 package com.ndroit.xsv.model;
 
+import nu.xom.Element;
+import nu.xom.Elements;
+
 /**
  * @author Aakash Sahai
  *
@@ -45,6 +48,15 @@ public class Line extends Geometry {
 	public void draw(int atX, int atY, double scale) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public static Line parse(Element el) throws Exception {
+		Line line = new Line();
+		line.x1 = Integer.parseInt(el.getAttributeValue("x1"));
+		line.y1 = Integer.parseInt(el.getAttributeValue("y1"));
+		line.x2 = Integer.parseInt(el.getAttributeValue("x2"));
+		line.y2 = Integer.parseInt(el.getAttributeValue("y2"));
+		return line;
 	}
 
 }
